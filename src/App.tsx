@@ -1,26 +1,24 @@
-import { Container, Button, Box, Typography } from '@mui/material';
-import LoadingButton from '@mui/lab/LoadingButton';
-import SaveIcon from '@mui/icons-material/Save';
+import React from "react";
+import { Link, Route, Routes } from "react-router-dom";
+const Home = React.lazy(() => import("./pages/home"));
+
+const Loading = () => <p>Loading ...</p>;
 
 function App() {
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" gutterBottom>
-          Create React App example
-        </Typography>
-        <Button variant="contained" color="primary" >Test</Button>
-        <LoadingButton
-          loading={true}
-          loadingPosition="start"
-          startIcon={<SaveIcon />}
-          variant="outlined"
-        >
-          Save
-        </LoadingButton>
+    <>
+    <ul>
+      <li><Link to='/'>Home</Link></li>
+      <li><Link to='/pokemon'>Pokemon</Link></li>
+    </ul>
+    <hr />
 
-      </Box>
-    </Container>
+    <React.Suspense fallback={<Loading />}>
+      <Routes>
+        <Route path='/' element={<Home/>} />
+      </Routes>
+    </React.Suspense>
+    </>
   );
 }
 
