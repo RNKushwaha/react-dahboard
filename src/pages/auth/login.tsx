@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -11,6 +11,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
+import { Link as RouterLink } from "react-router-dom";
 
 export default function Login() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -24,10 +25,10 @@ export default function Login() {
 
   return (
     <Container maxWidth="xs">
-      <Paper elevation={3}>
+      <Paper elevation={3} sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 1,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -39,6 +40,7 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -76,12 +78,12 @@ export default function Login() {
 
             <Grid container>
               <Grid item xs>
-                <Link href="/auth/forgot-password" variant="body2">
+                <Link component={RouterLink} to="/auth/forgot-password" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/auth/register" variant="body2">
+                <Link component={RouterLink} to="/auth/register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

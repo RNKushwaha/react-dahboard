@@ -196,7 +196,10 @@ export default function Navbar({ themeChanger }: { themeChanger: any }) {
               </>
               :
               <Tooltip title="Log In">
-                <Link component={RouterLink} to={'/auth/login'} underline="none" sx={{ color: 'white' }}>
+                <Link component={RouterLink} to={'/auth/login'}
+                  underline="none"
+                  sx={{ color: 'white', marginTop: '9px', verticalAlign: 'text-top' }}
+                >
                   <LoginIcon />
                 </Link>
               </Tooltip>
@@ -205,7 +208,6 @@ export default function Navbar({ themeChanger }: { themeChanger: any }) {
             <IconButton sx={{ ml: 1 }} onClick={themeChanger.toggleColorMode} color="inherit">
               {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
-
           </Box>
         </Toolbar>
       </Container>

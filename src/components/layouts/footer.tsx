@@ -4,10 +4,7 @@ import Typography from '@mui/material/Typography';
 
 export default function Footer() {
   return (
-    <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
-      <Typography variant="h6" align="center" gutterBottom>
-        React Dashboard
-      </Typography>
+    <Box sx={{ bgcolor: 'background.paper', p: 2 }} component="footer">
       <Typography
         variant="subtitle1"
         align="center"
