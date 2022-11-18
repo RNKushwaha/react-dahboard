@@ -2,6 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "./components/layouts/app-layout";
 import AuthLayout from "./components/layouts/auth-layout";
+import RootLayout from "./components/layouts/root-layout";
 
 const Home = React.lazy(() => import("./pages/home"));
 const Pokemon = React.lazy(() => import("./pages/pokemon"));
@@ -17,90 +18,82 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <AppLayout />,
+      element: <RootLayout />,
       loader: RootLoader,
       errorElement: <Error404 />,
       children: [
         {
           path: "/",
-          element: <Home />,
+          element: <AppLayout />,
+          loader: RootLoader,
+          errorElement: <Error404 />,
+          children: [
+            {
+              index: true,
+              element: <Home />,
+            },
+            {
+              path: "*",
+              element: <Error404 />,
+            },
+          ],
         },
         {
-          path: "*",
-          element: <Error404 />,
-        },
-      ],
-    },
-    {
-      path: "/pokemon",
-      element: <AppLayout />,
-      errorElement: <Error404 />,
-      children: [
-        {
-          index: true,
-          element: <Pokemon />,
-        },
-        {
-          path: "search",
-          element: <PokemonSearch />,
-          errorElement: <div>Oops! There was an error.</div>,
-        },
-        {
-          path: ":id",
-          element: <PokemonDetails />,
-        },
-        {
-          path: "*",
-          element: <Error404 />,
-        },
-      ],
-    },
-    {
-      path: "/auth",
-      element: <AuthLayout />,
-      children: [
-        {
-          path: "login",
-          element: <Login />,
+          path: "/pokemon",
+          element: <AppLayout />,
+          errorElement: <Error404 />,
+          children: [
+            {
+              index: true,
+              element: <Pokemon />,
+            },
+            {
+              path: "search",
+              element: <PokemonSearch />,
+              errorElement: <div>Oops! There was an error.</div>,
+            },
+            {
+              path: ":id",
+              element: <PokemonDetails />,
+            },
+            {
+              path: "*",
+              element: <Error404 />,
+            },
+          ],
         },
         {
-          path: "register",
-          element: <Register />,
+          path: "/auth",
+          element: <AuthLayout />,
+          children: [
+            {
+              index: true,
+              element: <Login />,
+            },
+            {
+              path: "login",
+              element: <Login />,
+            },
+            {
+              path: "register",
+              element: <Register />,
+            },
+            {
+              path: "forgot-password",
+              element: <ForgotPassword />,
+            },
+            {
+              path: "*",
+              element: <Error404 />,
+            },
+          ],
         },
-        {
-          path: "forgot-password",
-          element: <ForgotPassword />,
-        },
-        {
-          path: "*",
-          element: <Error404 />,
-        },
-      ],
-    },
+      ]
+    }
   ]);
 
   return (
     <RouterProvider router={router} />
-    // <React.Suspense fallback={<></>}>
-    //   <Routes>
-    //     <Route element={<AppLayout />}>
-    //       <Route index element={<Home />} />
-    //       <Route path="pokemon" element={<Pokemon />}>
-    //         <Route path=":id" element={<PokemonDetails />} />
-    //         <Route path=":search" element={<PokemonSearch />} />
-    //       </Route>
-    //     </Route>
-
-    //     <Route element={<AuthLayout />}>
-    //       <Route path="/auth/login" element={<Login />} />
-    //       <Route path="/auth/register" element={<Register />} />
-    //       <Route path="/auth/forgot-password" element={<ForgotPassword />} />
-    //     </Route>
-    //     <Route element={<AppLayout />}>
-    //       <Route path="*" element={<Error404 />} />
-    //     </Route>
-    //   </Routes>
-    // </React.Suspense>
   );
 }
 
